@@ -36,7 +36,7 @@ public class PlayerCharacter : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + moveDir * speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + moveDir.normalized * speed * Time.fixedDeltaTime);
     }
 
     public void setMoveY(float y)
