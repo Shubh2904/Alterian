@@ -27,8 +27,11 @@ public class PlayerInput : MonoBehaviour
             if (player.nearbyPickableItem != null && !player.isCarrying) {
                 player.PickUpItem();
             }else if (player.isCarrying){
-                player.DropItem();
+                player.PlaceItem();
             }
+        }
+        if(Input.GetKeyDown(inputData.fire1) && player.isCarrying){
+            player.ThrowItem();
         }
         if (moveInput == Vector2.zero)
         {
