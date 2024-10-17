@@ -14,47 +14,30 @@ public class PlayerInput : MonoBehaviour
         player = GetComponent<PlayerCharacter>();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(inputData.up))
-        {
-           player.setMoveY(1);
-           player.direction = "Up";
-        }
-        else if(Input.GetKey(inputData.down))
-        {
-            player.setMoveY(-1);
-            player.direction = "Down";
-        }
-        else 
-            player.setMoveY(0);
-            
-
-        if(Input.GetKey(inputData.left))
-        {
-            player.setMoveX(-1);
-            player.direction = "Left";
-        }
-        else if(Input.GetKey(inputData.right))
-        {
-            player.setMoveX(1);
-            player.direction = "Right";
-        }
-        else 
-            player.setMoveX(0);
-
-        if(player.moveDir == Vector2.zero)
-            player.action = "Idle";
-        else 
-            player.action = "Walk";
-
+        Vector2 moveInput = new Vector2(
+            Input.GetKey(inputData.right) ? 1 : Input.GetKey(inputData.left) ? -1 : 0,
+            Input.GetKey(inputData.up) ? 1 : Input.GetKey(inputData.down) ? -1 : 0
+        );
         
+        player.SetMoveDirection(moveInput.x, moveInput.y);
+        
+        if (Input.GetKeyDown(inputData.interact)) {
+            if (player.nearbyPickableItem != null && !player.isCarrying) {
+                player.PickUpItem();
+            }else if (player.isCarrying){
+                player.DropItem();
+            }
+        }
+        if (moveInput == Vector2.zero)
+        {
+            player.action = player.isCarrying ? "CarryIdle" : "Idle";
+        }
+        else
+        {
+            player.direction = moveInput.y > 0 ? "Up" : moveInput.y < 0 ? "Down" : moveInput.x < 0 ? "Left" : "Right";
+            player.action = player.isCarrying ? "CarryWalk" : "Walk";
+        }
     }
 }
