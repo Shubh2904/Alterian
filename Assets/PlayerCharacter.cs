@@ -59,7 +59,7 @@ public class PlayerCharacter : MonoBehaviour
             itemToDrop.GetComponent<SpriteRenderer>().sortingOrder = 5;
 
             Vector2 dropOffset = direction switch {
-                "Up" => new Vector2(0, 1f),
+                "Up" => new Vector2(0, 0.2f),
                 "Down" => new Vector2(0, -1f),
                 "Left" => new Vector2(-1f, 0),
                 "Right" => new Vector2(1f, 0),
