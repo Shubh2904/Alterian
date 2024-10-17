@@ -23,6 +23,10 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(Input.GetKeyDown(inputData.escape))
+            Application.Quit();
+
         if(Input.GetKey(inputData.up))
         {
            player.setMoveY(1);

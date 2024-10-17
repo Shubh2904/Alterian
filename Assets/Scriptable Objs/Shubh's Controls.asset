@@ -21,4 +21,4 @@ MonoBehaviour:
   fire1Alt: 0
   fire2Alt: 0
   interact: 0
-  escape: 0
+  escape: 27
