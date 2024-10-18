@@ -106,6 +106,7 @@ public class HeartDisplay : MonoBehaviour
         if(hp % hpPerHeart != 0)
             lastHeart.sprite = heartLevels[hp % hpPerHeart];
 
+        //Animations
         LeanTween.cancel(lastHeart.gameObject);
         lastHeart.transform.localScale = Vector3.one;
         LeanTween.scale(lastHeart.gameObject, Vector3.one * 1.25f, 0.15f).setRepeat(2).setLoopPingPong();
