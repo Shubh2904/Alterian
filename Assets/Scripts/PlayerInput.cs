@@ -44,19 +44,25 @@ public class PlayerInput : MonoBehaviour
         
     }
 
-    private void HandleInteraction(){
-         if(!player.isCarrying) {
-            Collider2D[] Pickables = Physics2D.OverlapCircleAll(transform.position,PickUpRange,pickableLayer);
-                foreach(Collider2D pickable in Pickables){
-                    if (Pickables.Length > 0) 
-                    {
-                        player.PickUpItem(Pickables[0].gameObject);
-                    }
-                }
+    private void HandleInteraction() {
+        if (!player.isCarrying) {
+            Collider2D closestPickable = null;
+            float closestDistance = Mathf.Infinity;
+
+        foreach (Collider2D pickable in Physics2D.OverlapCircleAll(transform.position, PickUpRange, pickableLayer)) {
+            float distance = Vector2.Distance(transform.position, pickable.transform.position);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestPickable = pickable;
             }
-            else {
-                player.PlaceItem();
-            }  
+        }
+        if (closestPickable != null) {
+            player.PickUpItem(closestPickable.gameObject);
+        }
+        } else {
+            player.PlaceItem();
+        }
     }
+
 
 }
