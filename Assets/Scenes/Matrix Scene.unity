@@ -2274,6 +2274,7 @@ GameObject:
   - component: {fileID: 2099010062}
   - component: {fileID: 2099010060}
   - component: {fileID: 2099010063}
+  - component: {fileID: 2099010064}
   m_Layer: 0
   m_Name: Alex
   m_TagString: Untagged
@@ -2475,6 +2476,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7063124, y: 0.28034782}
   m_EdgeRadius: 0
+--- !u!114 &2099010064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099010056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131f66fb0979d4f40b9be4c5be9f969b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

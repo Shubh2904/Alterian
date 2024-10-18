@@ -26,17 +26,7 @@ public class PlayerInput : MonoBehaviour
         player.SetMoveDirection(moveInput.x, moveInput.y);
         
         if (Input.GetKeyDown(inputData.interact)) {
-            if(!player.isCarrying) {
-            Collider2D[] Pickables = Physics2D.OverlapCircleAll(transform.position,PickUpRange,pickableLayer);
-                foreach(Collider2D pickable in Pickables){
-                    player.PickUpItem(pickable.gameObject);
-                    break;
-                }
-            }
-            else if (player.isCarrying){
-                player.PlaceItem();
-            
-            }    
+             HandleInteraction();        
         }
         if(Input.GetKeyDown(inputData.fire1) && player.isCarrying){
             player.ThrowItem();
@@ -54,10 +44,19 @@ public class PlayerInput : MonoBehaviour
         
     }
 
-     private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green; // Set the gizmo color to green
-        Gizmos.DrawWireSphere(transform.position, PickUpRange); // Draw a wire sphere around the object
+    private void HandleInteraction(){
+         if(!player.isCarrying) {
+            Collider2D[] Pickables = Physics2D.OverlapCircleAll(transform.position,PickUpRange,pickableLayer);
+                foreach(Collider2D pickable in Pickables){
+                    if (Pickables.Length > 0) 
+                    {
+                        player.PickUpItem(Pickables[0].gameObject);
+                    }
+                }
+            }
+            else {
+                player.PlaceItem();
+            }  
     }
 
 }
