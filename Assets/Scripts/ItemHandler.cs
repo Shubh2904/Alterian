@@ -35,7 +35,6 @@ public class ItemHandler : MonoBehaviour
             Vector2 throwDirection = GetThrowDirection(direction);
             Vector2 targetPosition = transform.position + (Vector3)throwDirection;
             StartCoroutine(SmoothThrowAndRotate(itemToThrow, targetPosition, 0.5f));
-            itemToThrow.GetComponent<SpriteRenderer>().sortingOrder = 5;
             playerCharacter.isCarrying = false;
         }
     }
@@ -50,7 +49,7 @@ public class ItemHandler : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-
+        item.GetComponent<SpriteRenderer>().sortingOrder = 5;
         item.SetPositionAndRotation(targetPosition, Quaternion.Euler(0, 0, 0));
     }   
     private Vector2 GetDropOffset(string direction){
