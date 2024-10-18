@@ -11,7 +11,6 @@ public class PlayerCharacter : MonoBehaviour
     [HideInInspector] public string action = "Idle";
     [HideInInspector] public Vector2 moveDir = Vector2.zero;
     [SerializeField] float speed;
-    [HideInInspector] public GameObject nearbyPickableItem = null;
     [HideInInspector] public bool isCarrying = false;
 
     void Awake() {
@@ -33,24 +32,13 @@ public class PlayerCharacter : MonoBehaviour
         moveDir = new Vector2(x, y);
     }
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Pickable")) {
-            nearbyPickableItem = other.gameObject;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("Pickable")) {
-            nearbyPickableItem = null;
-        }
-    }
-
-    public void PickUpItem() {
-        nearbyPickableItem.transform.SetParent(transform);
-        nearbyPickableItem.transform.localPosition = new Vector3(0, 1, 0);
+    public void PickUpItem(GameObject PickableItem) {
+        PickableItem.transform.SetParent(transform);
+        PickableItem.transform.localPosition = new Vector3(0, 1, 0);
         isCarrying = true;
-        nearbyPickableItem.GetComponent<Rigidbody2D>().simulated = false;
-        nearbyPickableItem.GetComponent<SpriteRenderer>().sortingOrder = 6;
+        PickableItem.GetComponent<Rigidbody2D>().simulated = false;
+        PickableItem.GetComponent<SpriteRenderer>().sortingOrder = 6;
     }
 
     public void PlaceItem() {

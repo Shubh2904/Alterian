@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] InputData inputData;
+    [SerializeField] private float PickUpRange = 1.5f;
 
+    [SerializeField] private LayerMask pickableLayer;
     PlayerCharacter player;
 
     void Awake()
@@ -24,11 +26,17 @@ public class PlayerInput : MonoBehaviour
         player.SetMoveDirection(moveInput.x, moveInput.y);
         
         if (Input.GetKeyDown(inputData.interact)) {
-            if (player.nearbyPickableItem != null && !player.isCarrying) {
-                player.PickUpItem();
-            }else if (player.isCarrying){
-                player.PlaceItem();
+            if(!player.isCarrying) {
+            Collider2D[] Pickables = Physics2D.OverlapCircleAll(transform.position,PickUpRange,pickableLayer);
+                foreach(Collider2D pickable in Pickables){
+                    player.PickUpItem(pickable.gameObject);
+                    break;
+                }
             }
+            else if (player.isCarrying){
+                player.PlaceItem();
+            
+            }    
         }
         if(Input.GetKeyDown(inputData.fire1) && player.isCarrying){
             player.ThrowItem();
@@ -42,5 +50,14 @@ public class PlayerInput : MonoBehaviour
             player.direction = moveInput.y > 0 ? "Up" : moveInput.y < 0 ? "Down" : moveInput.x < 0 ? "Left" : "Right";
             player.action = player.isCarrying ? "CarryWalk" : "Walk";
         }
+
+        
     }
+
+     private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green; // Set the gizmo color to green
+        Gizmos.DrawWireSphere(transform.position, PickUpRange); // Draw a wire sphere around the object
+    }
+
 }

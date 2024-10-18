@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 399840938}
   - component: {fileID: 399840941}
   - component: {fileID: 399840940}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pushable Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2113,7 +2113,7 @@ GameObject:
   - component: {fileID: 1559060884}
   - component: {fileID: 1559060887}
   - component: {fileID: 1559060886}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pickable Item
   m_TagString: Pickable
   m_Icon: {fileID: 0}
@@ -2274,7 +2274,6 @@ GameObject:
   - component: {fileID: 2099010062}
   - component: {fileID: 2099010060}
   - component: {fileID: 2099010063}
-  - component: {fileID: 2099010064}
   m_Layer: 0
   m_Name: Alex
   m_TagString: Untagged
@@ -2383,6 +2382,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputData: {fileID: 11400000, guid: d2dde32259dec394ea8d582eea559d7c, type: 2}
+  PickUpRange: 1.5
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!50 &2099010061
 Rigidbody2D:
   serializedVersion: 4
@@ -2426,7 +2429,6 @@ MonoBehaviour:
   action: 
   moveDir: {x: 0, y: 0}
   speed: 3
-  nearbyPickableItem: {fileID: 0}
   isCarrying: 0
 --- !u!61 &2099010063
 BoxCollider2D:
@@ -2473,41 +2475,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7063124, y: 0.28034782}
   m_EdgeRadius: 0
---- !u!70 &2099010064
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2099010056}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 2, y: 2}
-  m_Direction: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
