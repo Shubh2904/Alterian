@@ -23,8 +23,10 @@ public class PlayerCharacter : MonoBehaviour
         animator.Play($"{action} {direction}");
     }
 
-    void FixedUpdate() {
-        rb.MovePosition(rb.position + moveDir * speed * Time.fixedDeltaTime);
+
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + moveDir.normalized * speed * Time.fixedDeltaTime);
     }
 
     public void SetMoveDirection(float x, float y) {
