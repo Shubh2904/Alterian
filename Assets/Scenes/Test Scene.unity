@@ -767,10 +767,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.2564706
-    y: 0.21670854
-    width: 0.48470587
-    height: 0.56532663
+    x: 0.16395223
+    y: 0.10856978
+    width: 0.6710098
+    height: 0.7817024
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -3521,6 +3521,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputData: {fileID: 11400000, guid: d2dde32259dec394ea8d582eea559d7c, type: 2}
+  PickUpRange: 1.5
+  pickableLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &2099010061
 Rigidbody2D:
   serializedVersion: 4
@@ -3563,7 +3567,8 @@ MonoBehaviour:
   direction: 
   action: 
   moveDir: {x: 0, y: 0}
-  speed: 3
+  speed: 4.5
+  isCarrying: 0
 --- !u!61 &2099010063
 BoxCollider2D:
   m_ObjectHideFlags: 0
