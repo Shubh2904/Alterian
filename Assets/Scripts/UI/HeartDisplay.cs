@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -62,6 +63,8 @@ public class HeartDisplay : MonoBehaviour
             hearts.Add(heart);
 
             heart.sprite = heartLevels[0];
+
+            heart.AddComponent<UISnapToPixel>(); //fix for UI jiterring when positioned at floating number while camera moves
 
             // Debug.Log($"{i} -> {hearts[i].name}");
         }
