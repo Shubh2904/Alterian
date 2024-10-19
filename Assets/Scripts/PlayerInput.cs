@@ -37,7 +37,7 @@ public class PlayerInput : MonoBehaviour
         }
         else
         {
-            player.direction = moveInput.y > 0 ? "Up" : moveInput.y < 0 ? "Down" : moveInput.x < 0 ? "Left" : "Right";
+            player.direction = moveInput.x > 0 ? "Right" : moveInput.x < 0 ? "Left" : moveInput.y < 0 ? "Down" : "Up";
             player.action = player.isCarrying ? "CarryWalk" : "Walk";
         }
 
