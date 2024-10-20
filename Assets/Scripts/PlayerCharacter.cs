@@ -40,7 +40,6 @@ public class PlayerCharacter : MonoBehaviour
         moveDir = new Vector2(x, y);
     }
 
-
     public void PickUpItem(GameObject PickableItem) {
         itemHandler.PickUpItem(PickableItem);
     }
