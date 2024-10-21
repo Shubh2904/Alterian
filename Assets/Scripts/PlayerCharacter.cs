@@ -7,6 +7,9 @@ public class PlayerCharacter : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator animator;
+
+    public static PlayerCharacter singleton;
+
      public string direction = "Down";
     [HideInInspector] public string action = "Idle";
     [HideInInspector] public Vector2 moveDir = Vector2.zero;
@@ -19,6 +22,8 @@ public class PlayerCharacter : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         itemHandler = GetComponent<ItemHandler>();
+
+        singleton = this;
     }
 
     void Update() {
@@ -34,7 +39,6 @@ public class PlayerCharacter : MonoBehaviour
     public void SetMoveDirection(float x, float y) {
         moveDir = new Vector2(x, y);
     }
-
 
     public void PickUpItem(GameObject PickableItem) {
         itemHandler.PickUpItem(PickableItem);
