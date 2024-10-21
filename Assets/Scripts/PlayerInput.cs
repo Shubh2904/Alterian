@@ -41,7 +41,10 @@ public class PlayerInput : MonoBehaviour
             player.action = player.isCarrying ? "CarryWalk" : "Walk";
         }
 
-        
+        if(Input.GetKeyDown(inputData.Dash)){
+            StartCoroutine(player.Dash());
+        }
+
     }
 
     private void HandleInteraction() {
