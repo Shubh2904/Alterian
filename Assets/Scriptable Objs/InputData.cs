@@ -15,5 +15,6 @@ public class InputData : ScriptableObject
 
     public KeyCode interact;
     public KeyCode escape;
+    public KeyCode Dash ;
     
 }
