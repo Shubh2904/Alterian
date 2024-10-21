@@ -21,23 +21,30 @@ public class PlayerCharacter : MonoBehaviour
     public GameObject background ;
 
     private ItemHandler itemHandler ;
+    public bool isAttacking = false;
+    private PlayerAttack playerAttack;
+
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         itemHandler = GetComponent<ItemHandler>();
-
         singleton = this;
+        playerAttack = GetComponent<PlayerAttack>();
+        
     }
-
     void Update() {
-        animator.Play($"{action} {direction}");
+
+        if(!isAttacking) animator.Play($"{action} {direction}");
+        
     }
-
-
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + moveDir.normalized * speed * Time.fixedDeltaTime);
+    }
+
+    public void Attack() {
+        playerAttack.Attack(direction);
     }
 
     public void SetMoveDirection(float x, float y) {

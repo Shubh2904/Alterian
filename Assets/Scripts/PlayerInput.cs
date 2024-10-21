@@ -28,8 +28,9 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyDown(inputData.interact)) {
              HandleInteraction();        
         }
-        if(Input.GetKeyDown(inputData.fire1) && player.isCarrying){
-            player.ThrowItem();
+        if(Input.GetKeyDown(inputData.fire1) ){
+            if(player.isCarrying)player.ThrowItem();
+            else player.Attack();    
         }
         if (moveInput == Vector2.zero)
         {
