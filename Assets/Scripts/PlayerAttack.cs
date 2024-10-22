@@ -63,10 +63,10 @@ public class PlayerAttack : MonoBehaviour
     {
         return direction switch 
         {
-            "Up" => new Vector2(0, attackDistance / 2),
-            "Down" => new Vector2(0, -attackDistance / 2),
-            "Left" => new Vector2(-attackDistance / 2, 0),
-            "Right" => new Vector2(attackDistance / 2, 0),
+            "Up" => new Vector2(0, 0.8f  ),
+            "Down" => new Vector2(0, -0.8f ),
+            "Left" => new Vector2(-0.8f , 0),
+            "Right" => new Vector2(0.8f , 0),
             _ => Vector2.zero
         };
     }
@@ -74,7 +74,6 @@ public class PlayerAttack : MonoBehaviour
     private void HandleHit(Collider2D collider) 
     {
         Debug.Log($"Hit {collider.name}");
-        // Additional hit logic here, such as dealing damage
     }
 
     private float GetAnimationDuration(string animationName) 

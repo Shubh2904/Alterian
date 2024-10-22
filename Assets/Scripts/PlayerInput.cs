@@ -33,7 +33,7 @@ public class PlayerInput : MonoBehaviour
             else player.Attack();    
         }
         if (moveInput == Vector2.zero)
-        {
+        {          
             player.action = player.isCarrying ? "CarryIdle" : "Idle";
         }
         else

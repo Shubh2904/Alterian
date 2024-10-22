@@ -16,7 +16,7 @@ public class ItemHandler : MonoBehaviour
     }
     public void PlaceItem(string direction) {
         if (playerCharacter.isCarrying) {
-            Transform itemToDrop = transform.GetChild(0);
+            Transform itemToDrop = FindPickableItem();
             itemToDrop.SetParent(null);
             itemToDrop.GetComponent<Rigidbody2D>().simulated = true;
             itemToDrop.GetComponent<SpriteRenderer>().sortingOrder = 5;
@@ -27,7 +27,7 @@ public class ItemHandler : MonoBehaviour
     }
     public void ThrowItem(string direction) {
         if (playerCharacter.isCarrying) {
-            Transform itemToThrow = transform.GetChild(0);
+            Transform itemToThrow = FindPickableItem();
             itemToThrow.SetParent(null);
             Rigidbody2D itemRb = itemToThrow.GetComponent<Rigidbody2D>();
             itemRb.simulated = true;
@@ -71,6 +71,15 @@ public class ItemHandler : MonoBehaviour
                 _ => Vector2.zero
             };
         return throwDirection;
+    }
+
+    private Transform FindPickableItem() {
+    foreach (Transform child in transform) {
+        if (child.gameObject.layer == LayerMask.NameToLayer("Pickables")) {
+            return child;
+        }
+    }
+    return null;
     }
 
 }

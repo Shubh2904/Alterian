@@ -11,7 +11,7 @@ public class PlayerCharacter : MonoBehaviour
 
     public static PlayerCharacter singleton;
 
-     public string direction = "Down";
+    public string direction = "Down";
     [HideInInspector] public string action = "Idle";
     [HideInInspector] public Vector2 moveDir = Vector2.zero;
     [SerializeField] float speed;
@@ -31,7 +31,7 @@ public class PlayerCharacter : MonoBehaviour
         itemHandler = GetComponent<ItemHandler>();
         singleton = this;
         playerAttack = GetComponent<PlayerAttack>();
-        
+       
     }
     void Update() {
 
