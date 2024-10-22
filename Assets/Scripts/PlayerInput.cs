@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private LayerMask pickableLayer;
     PlayerCharacter player;
 
+    private Vector2 moveInput ;
+
     void Awake()
     {
         player = GetComponent<PlayerCharacter>();
@@ -18,7 +20,7 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        Vector2 moveInput = new Vector2(
+        moveInput = new Vector2(
             Input.GetKey(inputData.right) ? 1 : Input.GetKey(inputData.left) ? -1 : 0,
             Input.GetKey(inputData.up) ? 1 : Input.GetKey(inputData.down) ? -1 : 0
         );
@@ -29,8 +31,7 @@ public class PlayerInput : MonoBehaviour
              HandleInteraction();        
         }
         if(Input.GetKeyDown(inputData.fire1) ){
-            if(player.isCarrying)player.ThrowItem();
-            else player.Attack();    
+             if(!player.isCarrying)player.Attack();    
         }
         if (moveInput == Vector2.zero)
         {          
@@ -53,20 +54,30 @@ public class PlayerInput : MonoBehaviour
             Collider2D closestPickable = null;
             float closestDistance = Mathf.Infinity;
 
-        foreach (Collider2D pickable in Physics2D.OverlapCircleAll(transform.position, PickUpRange, pickableLayer)) {
-            float distance = Vector2.Distance(transform.position, pickable.transform.position);
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestPickable = pickable;
+            foreach (Collider2D pickable in Physics2D.OverlapCircleAll(transform.position, PickUpRange, pickableLayer)) {
+                float distance = Vector2.Distance(transform.position, pickable.transform.position);
+                if (distance < closestDistance) {
+                    closestDistance = distance;
+                    closestPickable = pickable;
+                }
+            }
+
+            if (closestPickable != null) {
+                player.PickUpItem(closestPickable.gameObject);
             }
         }
-        if (closestPickable != null) {
-            player.PickUpItem(closestPickable.gameObject);
+        else {
+                if(moveInput == Vector2.zero){
+                    player.PlaceItem();
+                }else{
+                    player.ThrowItem();
+                }
+            }
+
+            
+        
         }
-        } else {
-            player.PlaceItem();
-        }
-    }
+    
 
 
 }
