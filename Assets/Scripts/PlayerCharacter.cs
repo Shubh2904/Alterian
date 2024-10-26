@@ -1,46 +1,46 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Animator))]
 public class PlayerCharacter : MonoBehaviour
 {
-    Rigidbody2D rb;
-    Animator animator;
-
-    public static PlayerCharacter singleton;
-
-    public string direction = "Down";
-    [HideInInspector] public string action = "Idle";
+    [Header("Movement")]
+    [SerializeField] private float speed;
     [HideInInspector] public Vector2 moveDir = Vector2.zero;
-    [SerializeField] float speed;
-    [HideInInspector] public bool isCarrying = false;
+    [HideInInspector] public string direction = "Down";
+    [HideInInspector] public string action = "Idle";
+
+    [Header("Dash")]
     private bool canDash = true;
     private float dashCooldown = 1f;
-    public GameObject background ;
+    public GameObject background;
 
-    private ItemHandler itemHandler ;
-    public bool isAttacking = false;
+    [Header("Player Status")]
+    public static PlayerCharacter singleton;
+    [HideInInspector] public bool isCarrying = false;
+    [HideInInspector] public bool isAttacking = false;
+
+    [Header("Components")]
+    private Rigidbody2D rb;
+    private Animator body;
+    private ItemHandler itemHandler;
     private PlayerAttack playerAttack;
-
 
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         itemHandler = GetComponent<ItemHandler>();
         singleton = this;
         playerAttack = GetComponent<PlayerAttack>();
-       
+        body = transform.GetChild(0).GetComponent<Animator>();
     }
-    void Update() {
 
-        if(!isAttacking) animator.Play($"{action} {direction}");
-        
+    void Update() {
+        if (!isAttacking) body.Play($"{action} {direction}");
     }
-    void FixedUpdate()
-    {
-        if(!isAttacking) rb.MovePosition(rb.position + moveDir.normalized * speed * Time.fixedDeltaTime);
+
+    void FixedUpdate() {
+        if (!isAttacking)
+            rb.MovePosition(rb.position + moveDir.normalized * speed * Time.fixedDeltaTime);
     }
 
     public void Attack() {
@@ -51,8 +51,8 @@ public class PlayerCharacter : MonoBehaviour
         moveDir = new Vector2(x, y);
     }
 
-    public void PickUpItem(GameObject PickableItem) {
-        itemHandler.PickUpItem(PickableItem);
+    public void PickUpItem(GameObject pickableItem) {
+        itemHandler.PickUpItem(pickableItem);
     }
 
     public void PlaceItem() {
@@ -62,25 +62,28 @@ public class PlayerCharacter : MonoBehaviour
     public void ThrowItem() {
        itemHandler.ThrowItem(direction);
     }
-    public IEnumerator Dash(){
-        if(canDash){
-            canDash = false ;
-            Vector2 DashDirection = direction switch {
-                    "Up" => new Vector2(0, 5f),
-                    "Down" => new Vector2(0, -5f),
-                    "Left" => new Vector2(-5f, 0),
-                    "Right" => new Vector2(5f, 0),
-                    _ => Vector2.zero
-                };
-            transform.position += (Vector3)DashDirection ;
-            yield return new WaitForSeconds(0.03f);
-            background.SetActive(true);
-            yield return new WaitForSeconds(0.02f);
-            background.SetActive(false);
-            yield return new WaitForSeconds(dashCooldown);
-            canDash = true;
-        }
-        
-    }
 
+    public IEnumerator Dash() {
+        if (!canDash) yield break;
+        
+        canDash = false;
+        Vector2 dashDirection = direction switch {
+            "Up" => new Vector2(0, 5f),
+            "Down" => new Vector2(0, -5f),
+            "Left" => new Vector2(-5f, 0),
+            "Right" => new Vector2(5f, 0),
+            _ => Vector2.zero
+        };
+        
+        transform.position += (Vector3)dashDirection;
+        yield return new WaitForSeconds(0.03f);
+        
+        background.SetActive(true);
+        yield return new WaitForSeconds(0.02f);
+        
+        background.SetActive(false);
+        yield return new WaitForSeconds(dashCooldown);
+        
+        canDash = true;
+    }
 }

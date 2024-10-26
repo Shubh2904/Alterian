@@ -83,7 +83,6 @@ public class HeartDisplay : MonoBehaviour
 
         int totalHearts =  maxHP / hpPerHeart + Mathf.Clamp(maxHP % hpPerHeart, 0, 1);   
         
-        //reset all hearts
         for (int i = 0; i < hearts.Count; i++)
         {
             if(i<totalHearts)

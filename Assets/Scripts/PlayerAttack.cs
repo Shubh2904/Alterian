@@ -10,11 +10,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask targetLayer; // Layer for the enemies to detect during attack
 
     private Vector2 lastAttackPosition; // Store the last attack position for Gizmos
+    private Animator Sword,Body;
 
     private void Start() 
     {
-        animator = GetComponent<Animator>();
         playerCharacter = GetComponent<PlayerCharacter>();
+        Sword = transform.GetChild(1).GetComponent<Animator>();
+        Body = transform.GetChild(0).GetComponent<Animator>();
     }
 
     public void Attack(string direction) 
@@ -27,10 +29,10 @@ public class PlayerAttack : MonoBehaviour
         playerCharacter.isAttacking = true;
         ActivateWeapon(true);
 
-        animator.Play($"Swing {direction}");
-        PlayChildAnimation($"Swing {direction}");
+        Body.Play($"Swing {direction}");
+        Sword.Play($"Swing {direction}");
 
-        lastAttackPosition = (Vector2)transform.position + GetCircleOffset(direction); // Store position for Gizmos
+        lastAttackPosition = (Vector2)transform.position + GetCircleOffset(direction); 
         PerformOverlapCircle(direction);
 
         yield return new WaitForSeconds(GetAnimationDuration($"Swing {direction}"));
@@ -41,12 +43,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void ActivateWeapon(bool state) 
     {
-        transform.GetChild(0).gameObject.SetActive(state);
-    }
-
-    private void PlayChildAnimation(string animationName) 
-    {
-        transform.GetChild(0).GetComponent<Animator>().Play(animationName);
+        transform.GetChild(1).gameObject.SetActive(state);
     }
 
     private void PerformOverlapCircle(string direction) 
@@ -73,12 +70,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleHit(Collider2D collider) 
     {
-        Debug.Log($"Hit {collider.name}");
+        collider.gameObject.GetComponent<Health>().TakeDamage(5);
     }
 
     private float GetAnimationDuration(string animationName) 
     {
-        foreach (AnimationClip clip in animator.runtimeAnimatorController.animationClips) 
+        foreach (AnimationClip clip in Body.runtimeAnimatorController.animationClips) 
         {
             if (clip.name == animationName) 
             {

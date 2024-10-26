@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UISnapToPixel : MonoBehaviour
 {
-    //fixes for UI jiterring when positioned at floating number while camera moves
 
     void LateUpdate()
     {
