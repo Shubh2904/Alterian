@@ -4,6 +4,7 @@ using UnityEngine;
 public class BeeingEffectedOnHit : MonoBehaviour
 {
     Health _Health;
+    public float time ;
     SpriteRenderer sprite;
 
     private void Start() {
@@ -21,7 +22,7 @@ public class BeeingEffectedOnHit : MonoBehaviour
     }
 
     IEnumerator HitEffect() {
-         yield return new WaitForSeconds(0.3f);
+         yield return new WaitForSeconds(time);
         sprite.enabled = false;
         yield return new WaitForSeconds(0.1f);
         sprite.enabled = true;

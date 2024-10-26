@@ -1014,6 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcdf8a358b42d74aa9dc4a257f8728c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0.3
 --- !u!114 &523901793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,6 +3421,8 @@ GameObject:
   - component: {fileID: 1559060887}
   - component: {fileID: 1559060886}
   - component: {fileID: 1559060888}
+  - component: {fileID: 1559060890}
+  - component: {fileID: 1559060889}
   m_Layer: 3
   m_Name: Pickable Item
   m_TagString: Untagged
@@ -3578,7 +3581,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be211e0cb3c72d94d93ec44671c729ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 10
+--- !u!114 &1559060889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559060883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fcdf8a358b42d74aa9dc4a257f8728c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 0
+--- !u!114 &1559060890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559060883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 090252ee336a7d044a517dc0b55307bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EffectPrefab: {fileID: 5504313291295387812, guid: d46c25b4e878b95448150b1a72381366, type: 3}
 --- !u!1 &1572174574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3645,6 +3674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fcdf8a358b42d74aa9dc4a257f8728c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 0.3
 --- !u!114 &1636508811
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -49,8 +49,10 @@ public class ItemHandler : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        item.GetComponent<Health>().TakeDamage(2);
         item.GetComponent<SpriteRenderer>().sortingOrder = 5;
         item.SetPositionAndRotation(targetPosition, Quaternion.Euler(0, 0, 0));
+        
     }   
     private Vector2 GetDropOffset(string direction){
         Vector2 dropOffset = direction switch {
